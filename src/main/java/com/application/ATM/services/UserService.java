@@ -32,7 +32,9 @@ public class UserService {
                 orElseThrow(() -> new EntityNotFoundException("NO user with user name " + username));
     }
 
-    public User getOneUser(int id ){
+    protected User getOneUser(int id ){
         return userRepository.findById(id).orElse(null);
     }
+
+
 }
