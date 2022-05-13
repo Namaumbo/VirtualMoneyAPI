@@ -6,6 +6,10 @@ import javax.persistence.*;
 @Table(name = "Account_detail")
 public class AccountDetail {
 
+    @OneToOne
+    private User user;
+
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;

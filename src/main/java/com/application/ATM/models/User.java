@@ -8,6 +8,11 @@ import javax.persistence.*;
 @Table(name="`User`")
 public class User
 {
+
+        @OneToOne(cascade = CascadeType.ALL)
+        @JoinColumn(name = "AccountDetail_id")
+        private AccountDetail accountDetail;
+
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
         private int Id;
@@ -21,9 +26,9 @@ public class User
         private String nationalIdNumber;
         @Column(name = "city" , nullable = false)
         private String city;
-        @Column(name = "phone_number" , nullable = false)
+        @Column(name = "phone_number" , nullable = false, unique = true)
         private String phoneNumber;
-        @Column(name = "email",nullable = false)
+        @Column(name = "email",nullable = false,unique = true)
         private String email;
         @Column(name ="password",nullable = false,unique = true)
         private String password;
@@ -77,5 +82,21 @@ public class User
 
         public void setPhoneNumber(String phoneNumber) {
             this.phoneNumber = phoneNumber;
+        }
+
+        public String getEmail() {
+        return email;
+        }
+
+        public void setEmail(String email) {
+            this.email = email;
+        }
+
+        public String getPassword() {
+            return password;
+        }
+
+        public void setPassword(String password) {
+            this.password = password;
         }
 }

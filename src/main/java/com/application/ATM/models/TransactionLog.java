@@ -7,6 +7,8 @@ import java.util.Date;
 @Entity
 @Table(name = "TransactionLog")
 public class TransactionLog {
+
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;

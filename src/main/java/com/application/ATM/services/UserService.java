@@ -39,6 +39,7 @@ public class UserService {
         return userRepository.findById(id).orElse(null);
     }
 
+//    get current balance of a user specified
     public ResponseEntity<Object> getCurrentBalance(int id) {
         Optional<User> userOptional = userRepository.findById(id);
         if (userOptional.isPresent()){
@@ -46,5 +47,16 @@ public class UserService {
             return APIResponses.generateResponse(null, HttpStatus.OK,userOptional.map(User::getFirstName));
         }
         return null;
+    }
+
+//    adding money to walet
+    public ResponseEntity<Object> addMoneyToWallet(double cash , int id){
+        Optional<User> userOptional = userRepository.findById(id);
+        if(!userOptional.isPresent()){
+            return APIResponses.generateResponse("no user",HttpStatus.NOT_FOUND,null);
+        }
+        double moneyAdded = 198+345;
+        return APIResponses.generateResponse("money added successfuly",HttpStatus.OK,cash);
+
     }
 }
