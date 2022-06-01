@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
 
-
 @RestController
 @RequestMapping("/api/v1")
 public class UserController {
@@ -22,7 +21,7 @@ public class UserController {
         this.userService = userService;
     }
 
-    @GetMapping("/register-user")
+    @PostMapping("/register-user")
     public void registerUser(@RequestBody User user) {
         userService.RegisterUser(user);
 
@@ -33,4 +32,8 @@ public class UserController {
      return  userService.getCurrentBalance(id);
     }
 
+//    public ResponseEntity<Object> addCash(@PathVariable("accountNumber") String accountNumber){
+////        return userService.addMoneyToWallet(accountNumber);
+//
+////    }
 }

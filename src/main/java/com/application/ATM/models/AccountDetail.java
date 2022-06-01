@@ -1,18 +1,22 @@
 package com.application.ATM.models;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import javax.persistence.*;
+import java.util.Random;
 
 @Entity
 @Table(name = "Account_detail")
 public class AccountDetail {
 
-    @OneToOne
+    @OneToOne(mappedBy = "accountDetail", cascade = CascadeType.ALL)
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private User user;
-
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
+    private int Acc_id;
 
     @Column(name = "account_balance", nullable = false)
     private double accountBalance;
@@ -24,11 +28,11 @@ public class AccountDetail {
     }
 
     public int getId() {
-        return id;
+        return Acc_id;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setId(int Acc_id) {
+        this.Acc_id = Acc_id;
     }
 
     public double getAccountBalance() {
@@ -40,11 +44,20 @@ public class AccountDetail {
     }
 
     public String getAccountNumber() {
-        return accountNumber;
+        Random random = new Random();
+        int accountNumber = random.nextInt(999999);
+        return ""+accountNumber;
     }
 
     public void setAccountNumber(String accountNumber) {
         this.accountNumber = accountNumber;
     }
 
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
 }

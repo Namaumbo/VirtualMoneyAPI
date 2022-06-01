@@ -1,8 +1,12 @@
 package com.application.ATM.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.lang.NonNull;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name="`User`")
@@ -10,8 +14,11 @@ public class User
 {
 
         @OneToOne(cascade = CascadeType.ALL)
-        @JoinColumn(name = "AccountDetail_id")
+        @JoinColumn(name = "account_id",referencedColumnName ="Acc_id")
+        @JsonIgnore
+//        referenced  by the other table
         private AccountDetail accountDetail;
+
 
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -99,4 +106,12 @@ public class User
         public void setPassword(String password) {
             this.password = password;
         }
+
+    public AccountDetail getAccountDetail() {
+        return accountDetail;
+    }
+
+    public void setAccountDetail(AccountDetail accountDetail) {
+        this.accountDetail = accountDetail;
+    }
 }
